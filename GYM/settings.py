@@ -90,7 +90,8 @@ INSTALLED_APPS = [
     'user',
     'gymprofile',
     'payments',
-    # 'social_auth',
+    'social_auth',
+    'social_django',
 
     # 'rest_framework.authtoken',
     # 'rest_auth',
@@ -183,31 +184,17 @@ WSGI_APPLICATION = 'GYM.wsgi.application'
 # }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd58isnktnrnlao',
 
-#         'USER': 'dbhpbdyencqnpq',
-
-#         'PASSWORD': 'd10a2cacdf2d4e1908374979c1718fa93eb2a895a95c8e405a24ca64d8dd2b8e',
-
-#         'HOST': 'ec2-23-21-229-200.compute-1.amazonaws.com',
-
-
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db1',
+        'NAME': 'd3rc59tv0mhir5',
 
-        'USER': 'myuser',
+        'USER': 'flkoaitxumvwfk',
 
-        'PASSWORD': 'mypass',
+        'PASSWORD': 'fd42ddead732926a84d49af59972d8c10e8e5823540da0ce4bd2fad71b7ced76',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-52-72-252-211.compute-1.amazonaws.com',
 
 
         'PORT': '5432',
