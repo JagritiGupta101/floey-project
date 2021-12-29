@@ -1,0 +1,181 @@
+Metadata-Version: 2.1
+Name: django-admin-vali
+Version: 0.2.2
+Summary: Django Admin with Vali theme
+Home-page: https://github.com/JchJ/Vali-Django-Admin
+Author: Juan Carlo Henriques Junger
+Author-email: juancarlo.h.junger@hotmail.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.1
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Description-Content-Type: text/markdown
+
+# Django Admin Vali  
+
+[![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.2.2&x2=0)](https://pypi.org/project/django-admin-vali/) [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/JchJ/Vali-Django-Admin/blob/master/LICENSE)
+
+This project is based in django-vali project from cnanyi  
+https://github.com/cnanyi/django-vali.
+
+# Overview
+
+### Dashboard Administration
+
+  - User who has permission to access the dashboard.
+  - Can view all log entries.
+  - Can view all dynamics data.
+
+#### Requirements
+
+  - django >= 2.0
+  - python >= 3.0  
+
+### Routes
+
+  - url: ```/admin```
+    →	Page with administrator access.
+  - url: ```/admin/dashboard```
+    →	Page with dashboard access.
+
+  **Extra**
+  This project allows you to use i18n in urls. See more in [Django Website](https://docs.djangoproject.com/en/2.0/topics/i18n/).
+
+### Installation
+
+Install using `pip`...
+
+```sh
+    $ pip install django-admin-vali
+```
+
+Add `vali` to your `INSTALLED_APPS` setting before `django.contrib.admin`.
+
+```sh
+    INSTALLED_APPS = (
+        ...
+        'vali',
+        'django.contrib.admin',
+        ...
+    )
+```
+
+If you want to use Vali Dashboard, include `vali.urls` to your `urls.py` file.
+```sh
+    urlpatterns = (
+        ...
+        path('admin/', include(('vali.urls','vali'), namespace='dashboard')),
+        ...
+    )
+```
+
+In your settings, add `VALI_CONFIG` to enable dashboard view, change theme and get responsive permission fields.
+```sh
+    VALI_CONFIG = {
+        'theme': 'default',
+        'dashboard': {
+            'name': 'Dashboard',
+            'url': '/admin/dashboard/',
+            'subtitle': 'Dashboard view with all statistics',
+            'site_name': 'Dashboard admin',
+            'url_image_profile': ''
+        },
+        'fieldset': {
+            'fields': ['user_permissions', 'permissions']
+        },
+        'applist': {
+            'order': "registry", "group": True
+        }
+    }  
+```
+
+To change the theme, just choose one of this: default, green, brown, blue, purple or create your own.
+
+### Usage
+
+In your `counters.py` add ...
+```sh
+    from vali.counters import CounterBase
+    from .models import Model
+
+    class MyModelCounter(CounterBase):
+        title = 'Title goes here'
+
+        def get_value(self, request):
+            return Model.objects.count()  
+```
+or  
+```sh
+    from vali.counters import ModelCounter
+    from .models import Model
+
+    class MyModelCounter(ModelCounter):
+        model = Model  
+```
+
+In your `charts.py` add ...
+```sh
+    from vali.charts import ModelCharts
+    from .models import Model
+
+
+    class ChartCounter(ModelCharts):
+        model = Model
+        chart_type = 'Bar'
+        name = 'barchart1'
+        labels = ["2018-03-01", "2018-03-02", "2018-03-03", "2018-03-04", "2018-03-05"]
+        datasets = [
+            {
+                "label": "dataset 1",
+                "fillColor": "rgba(220,220,220,0.2)",
+                "strokeColor": "rgba(220,220,220,1)",
+                "pointColor": "rgba(220,220,220,1)",
+                "pointStrokeColor": "#fff",
+                "pointHighlightFill": "#fff",
+                "pointHighlightStroke": "rgba(220,220,220,1)",
+                "data": [65, 59, 80, 81, 80]
+            },
+            {
+                "label": "dataset 2",
+                "fillColor": "rgba(151,187,205,0.2)",
+                "strokeColor": "rgba(151,187,205,1)",
+                "pointColor": "rgba(151,187,205,1)",
+                "pointStrokeColor": "#fff",
+                "pointHighlightFill": "#fff",
+                "pointHighlightStroke": "rgba(151,187,205,1)",
+                "data": [28, 48, 40, 19, 69]
+            }
+        ]  
+```
+In your `views.py` add ...
+
+    from .counters import MyModelCounter
+    from .charts import ChartCounter
+    from vali.views import ValiDashboardBase
+
+
+    class ModelDashboardView(ValiDashboardBase):
+        template_name = 'dashboard.html'
+
+        list_counters = [
+            MyModelCounter(),
+        ]   
+        list_charts = [
+            ChartCounter(),
+        ]
+
+License
+--------
+This project is licensed under the [MIT](LICENSE) License.
+
+
