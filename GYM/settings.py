@@ -91,17 +91,14 @@ INSTALLED_APPS = [
     'gymprofile',
     'payments',
     'social_auth',
-    'social_django',
 
-    # 'rest_framework.authtoken',
-    # 'rest_auth',
 
     #for social login
     'django.contrib.sites',
     'allauth',
-#  'allauth.account',
+
     'rest_framework.authtoken',
-#  'rest_auth.registration',
+
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     #  'drf_yasg',
@@ -133,7 +130,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -141,13 +138,14 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 WHITENOISE_USE_FINDERS=True
-AUTHENTICATION_BACKENDS = (
- 'django.contrib.auth.backends.ModelBackend',
- 'allauth.account.auth_backends.AuthenticationBackend',
-#  'social_core.backends.facebook.FacebookOAuth2',
- 'social_core.backends.google.GoogleOAuth2',
 
- )
+# AUTHENTICATION_BACKENDS = (
+#  'django.contrib.auth.backends.ModelBackend',
+#  'allauth.account.auth_backends.AuthenticationBackend',
+# #  'social_core.backends.facebook.FacebookOAuth2',
+#  'social_core.backends.google.GoogleOAuth2',
+
+#  )
 
 ROOT_URLCONF = 'GYM.urls'
 
@@ -176,12 +174,6 @@ WSGI_APPLICATION = 'GYM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 
