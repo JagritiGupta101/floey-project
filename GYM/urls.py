@@ -56,7 +56,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('gymprofile/', include('gymprofile.urls')),
     path('payments/',include('payments.urls')),
-    # path('social/',include('social_auth.urls')),
+    path('social/',include('social_auth.urls')),
 
 
     # path('', schema_view.with_ui('swagger',
